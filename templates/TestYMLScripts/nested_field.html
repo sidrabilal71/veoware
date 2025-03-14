@@ -1,0 +1,22 @@
+{% load custom_filters %}
+<ul>
+    <li>
+        <strong>{{ key }}</strong>
+    
+        {% if value|is_dict %}
+            <div id="{{ parent_key }}{{ key }}" style="display: block;">
+                {% for sub_key, sub_value in value.items %}
+                    {% include 'TestYMLScripts/nested_field.html' with key=sub_key value=sub_value parent_key=parent_key|add:key|add:"." %}
+                {% endfor %}
+            </div>
+        {% elif value|is_list %}
+                {% for item in value %}
+                        {% include 'TestYMLScripts/nested_field.html' with key=forloop.counter0 value=item parent_key=parent_key|add:key|add:"." %}
+                {% endfor %}
+        {% else %}
+            <label>
+                <input type="text" name="{{ parent_key }}{{ key }}" value="{{ value }}">
+            </label>
+        {% endif %}
+    </li>
+</ul>

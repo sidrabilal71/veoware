@@ -1,0 +1,135 @@
+Plugins:
+  datastore:
+    plugin: DataStore
+    output_dir: './'
+    previous_data: './result.yml'
+    overwrite: True
+  cmg: 
+    {
+      device : 'CMG_production',
+      interface : 'can',
+      CSP_host_id : 22,
+      CSP_id : 19,
+      cmd_timeout: 1000,
+      CSP_version : 'v1',
+      interface_config:
+        {
+            interface_name: 'socketcan',
+            channel: 'can0',
+            bitrate: 1000000
+        },
+      module: "CMG-007-01-0007"
+    }
+
+Tests:
+  GB_MechOffsetCalib:
+    enable : False
+    description: 'Find the mechanical angle offset for the gimbal.'
+    continue_on_fail: False
+  GB_ElecOffsetCalib:
+    enable : False
+    description: 'Find the electrical angle offset for the gimbal.'
+    continue_on_fail: False
+  GB_ClTuning:
+    enable : False
+    description: 'Tune the gimbal current-loop parameters'
+    continue_on_fail: False
+    sig_ampl: 2   # square-wave IQ setpoint amplitude
+    sig_freq: 10  # square wave frequency
+    freq_sampl: 20000   # sampling frequency
+    debug: False
+  GB_ClResponse:
+    enable : False
+    description: 'Save data on gimbal current-loop performance'
+    continue_on_fail: False
+    freq_response:
+      enable: False
+      sig_ampl: 1.5
+      freq_sampl: 20000   # sampling frequency
+      rep_fact: 3
+      f_min: 10
+      f_max: 1000
+    time_response:
+      enable: True
+      sig_freq: 10  # square wave frequency
+      freq_sampl: 20000   # sampling frequency
+      rep_fact: 3
+      sig_ampl:
+        - 1
+        - 2
+        - 3
+        - 4
+  GB_IqCharacterization:
+    enable : False
+    description: 'Find the Iq required to win the gimbal friction'
+    continue_on_fail: False
+  GB_SlTuning:
+    enable : False
+    description: 'Tune the gimbal speed-loop parameters'
+    continue_on_fail: False
+    freq_sampl: 1000  # sampling frequency
+    iq_fact: 100       # percentage of iq pattern applied
+    n_range: 2
+    tag:
+      - "L"
+      - "H"
+    sig_ampl: # square-wave speed amplitude
+      - 3
+      - 45
+    sig_freq: # square wave frequency
+      - 0.25
+      - 1
+    debug: False
+  GB_SlResponse:
+    enable : False
+    description: 'Save data on gimbal speed-loop performance'
+    continue_on_fail: False
+    freq_sampl: 1000  # sampling frequency
+    iq_fact: 100       # percentage of iq pattern applied
+    tag:
+      - "L"
+      - "H"
+    freq_response:
+      enable: True
+      rep_fact: 2
+      f_min: 0.1
+      f_max: 100
+      sig_ampl:
+        - 5
+        - 45
+    time_response:
+      enable: True
+      sig_freq: 0.05       # square wave frequency
+      rep_fact: 1
+      sig_ampl:
+        - [0.5, 1, 3, 5, 10]
+        - [10, 30, 60, 90]
+  GB_PlTuning:
+    enable : False
+    description: 'Tune the gimbal position-loop parameters'
+    continue_on_fail: False
+    sig_ampl: 5   # square-wave position change
+    max_speed: 90 # antiwindup speed satturation
+    sig_freq: 0.5 # square wave frequency
+    freq_sampl: 100   # sampling frequency
+    iq_fact: 100      # percentage of iq pattern applied
+    debug: False
+  GB_PlResponse:
+    enable : False
+    description: 'Save data on gimbal position-loop performance'
+    continue_on_fail: False
+    iq_fact: 100      # percentage of iq pattern applied
+    time_response:
+      sig_freq: 0.5     # square wave frequency
+      freq_sampl: 100   # sampling frequency
+      rep_fact: 2
+      max_speed: 90     # antiwindup speed satturation
+      sig_ampl:
+        - 1
+        - 2
+        - 5
+        - 10
+  CA_ReportGenerator:
+    enable : True
+    description: 'Generate the report fot the module'
+    continue_on_fail: False

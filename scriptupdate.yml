@@ -1,0 +1,116 @@
+Tests:
+  csrfmiddlewaretoken: XkqA4cuYB9pWHvuVmsLRp50yMKQQ2phTudPjq7Nbe8ow5Z8JubrVISsk1PLW14oq
+  GB_MechOffsetCalib:
+    enable: 'False'
+    description: Find the mechanical angle offset for the gimbal.
+    continue_on_fail: 'False'
+  GB_ElecOffsetCalib:
+    enable: 'False'
+    description: Find the electrical angle offset for the gimbal.
+    continue_on_fail: 'False'
+  GB_ClTuning:
+    enable: 'False'
+    description: Tune the gimbal current-loop parameters
+    continue_on_fail: 'False'
+    sig_ampl: '2'
+    sig_freq: '10'
+    freq_sampl: '20000'
+    debug: 'False'
+  GB_ClResponse:
+    enable: 'False'
+    description: Save data on gimbal current-loop performance
+    continue_on_fail: 'False'
+    freq_response:
+      enable: 'False'
+      sig_ampl: '1.5'
+      freq_sampl: '20000'
+      rep_fact: '3'
+      f_min: '10'
+      f_max: '1000'
+    time_response:
+      enable: 'True'
+      sig_freq: '10'
+      freq_sampl: '20000'
+      rep_fact: '3'
+      sig_ampl:
+        '0': '1'
+        '1': '2'
+        '2': '3'
+        '3': '4'
+  GB_IqCharacterization:
+    enable: 'False'
+    description: Find the Iq required to win the gimbal friction
+    continue_on_fail: 'False'
+  GB_SlTuning:
+    enable: 'False'
+    description: Tune the gimbal speed-loop parameters
+    continue_on_fail: 'False'
+    freq_sampl: '1000'
+    iq_fact: '100'
+    n_range: '2'
+    tag:
+      '0': L
+      '1': H
+    sig_ampl:
+      '0': '3'
+      '1': '45'
+    sig_freq:
+      '0': '0.25'
+      '1': '1'
+    debug: 'False'
+  GB_SlResponse:
+    enable: 'False'
+    description: Save data on gimbal speed-loop performance
+    continue_on_fail: 'False'
+    freq_sampl: '1000'
+    iq_fact: '100'
+    tag:
+      '0': L
+      '1': H
+    freq_response:
+      enable: 'True'
+      rep_fact: '2'
+      f_min: '0.1'
+      f_max: '100'
+      sig_ampl:
+        '0': '5'
+        '1': '45'
+    time_response:
+      enable: 'True'
+      sig_freq: '0.05'
+      rep_fact: '1'
+  ? ''
+  : '0': '10'
+    '1': '30'
+    '2': '60'
+    '3': '90'
+    '4': '10'
+  GB_PlTuning:
+    enable: 'False'
+    description: Tune the gimbal position-loop parameters
+    continue_on_fail: 'False'
+    sig_ampl: '5'
+    max_speed: '90'
+    sig_freq: '0.5'
+    freq_sampl: '100'
+    iq_fact: '100'
+    debug: 'False'
+  GB_PlResponse:
+    enable: 'False'
+    description: Save data on gimbal position-loop performance
+    continue_on_fail: 'False'
+    iq_fact: '100'
+    time_response:
+      sig_freq: '0.5'
+      freq_sampl: '100'
+      rep_fact: '2'
+      max_speed: '90'
+      sig_ampl:
+        '0': '1'
+        '1': '2'
+        '2': '5'
+        '3': '10'
+  CA_ReportGenerator:
+    enable: 'True'
+    description: Generate the report fot the module
+    continue_on_fail: False

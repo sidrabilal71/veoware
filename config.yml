@@ -1,0 +1,268 @@
+Devices:
+  psu :
+    {
+      device : 'AimTTi_CPX400DP',
+      interface : 'serial',
+      interface_config :
+        {
+          dev: '/dev/ttyPSU_596251',
+          baudrate: 9600
+        }
+    }
+
+  sam :
+    {
+      device : 'SAMV71',
+      interface : 'serial',
+      interface_config :
+        {
+          dev : '/dev/ttyTCTRL_ATML2407171800007130',
+          baudrate : 115200
+        },
+      hwdef : 'hwdef'
+    }
+
+  polarfire :
+    {
+      device : 'FPGA_Polarfire',
+      interface : 'None'
+    }
+
+  riscv:
+    {
+      device : 'RISCV',
+      interface : 'None'
+    }
+
+  icc: 
+    {
+      device : 'CMG_production',
+      interface : 'can',
+      CSP_host_id : 22,
+      CSP_id : 19,
+      cmd_timeout: 1000,
+      CSP_version : 'v1',
+      interface_config:
+        {
+            interface_name: 'socketcan',
+            channel: 'can0',
+            bitrate: 1000000
+        }
+    }
+
+Tests:
+  FPGAPowerChain_GeneralVoltageTest:
+    description: 'General voltage check of FPGA power chain'
+    Enable: True
+    continue_on_fail: False
+    tolerance:    # 3 options: percentage: '%,val,tol_in_%'
+                  #                   +/-: 'abs,val,absolute_tol' 
+                  #               min-max: 'minmax,valmin,valmax'     
+      SUPPLY_I:
+        REPORT: 'abs,0.36,0.05' #'abs,0.3,0.05' # If the FPGA has never been flashed, the current will not be 0.36A !!
+        ABSMAX: 'abs,0.36,0.08' #'abs,0.3,0.08'
+      P5V_SENSE_I: '10%'
+      P5V_SENSE_V:
+        REPORT: 'abs,5,0.1'
+        ABSMAX: 'abs,5,0.15'
+      P1V_V:
+        REPORT: 'abs,1,0.03'
+        ABSMAX: 'abs,1,0.2' #'abs,1,0.08'
+      P1V8_V:
+        REPORT: 'abs,1.8,0.09'
+        ABSMAX: 'abs,1.8,0.12'
+      P2V5_V:
+        REPORT: 'abs,2.5,0.075'
+        ABSMAX: 'abs,2.5,0.1'
+      P3V3_V:
+        REPORT: 'abs,3.3,0.1'
+        ABSMAX: 'abs,3.3,0.15'
+  
+  FPGABitstreamFlashTest:
+    description: 'FPGA Bitstream Flash'
+    Enable: True
+    continue_on_fail: False
+    fpexpress_param:
+      jobfile_location: "/home/dev/Git/ICC-169-v1_91_CONF2.job"
+      Checksum: "A99A"
+      Program: True
+      Verify: True
+    tolerance:
+      SUPPLY_I:
+        REPORT: 'abs,0.36,0.05' #'abs,0.3,0.05'
+        ABSMAX: 'abs,0.36,0.08' #'abs,0.3,0.08'
+
+  FPGAPowerChain_PowerUpSeqTest:
+    description: 'Power-up sequence of FPGA power chain'
+    Enable: True
+    continue_on_fail: True
+    tolerance:
+      P1V_V_DLY_MS: 'minmax,5.5,6.5'
+      P1V_V_to_P2V5_V_DLY_MS: 'minmax,6.5,7.5'
+      P2V5_V_to_P1V8_V_DLY_MS: 'minmax,1.5,2.5'
+      P2V5_V_to_P3V3_V_DLY_MS: 'minmax,1.5,2.5'
+
+  FPGAPowerChain_LoadingTest:
+    description: 'Loading of FPGA Power Chain'
+    Enable: True
+    continue_on_fail: True
+    tolerance:
+      SUPPLY_I:
+        REPORT: 'abs,0.36,0.05' #'abs,0.3,0.05' # If the FPGA has never been flashed, the current will not be 0.36A !!
+        ABSMAX: 'abs,0.36,0.08' #'abs,0.3,0.08'
+      P5V_SENSE_I: '10%'
+      P5V_SENSE_V:
+        REPORT: 'abs,5,0.1'
+        ABSMAX: 'abs,5,0.15'
+      P1V_V:
+        REPORT: 'abs,1,0.03'
+        ABSMAX: 'abs,1,0.2' #'abs,1,0.08'
+      P1V8_V:
+        REPORT: 'abs,1.8,0.09'
+        ABSMAX: 'abs,1.8,0.12'
+      P2V5_V:
+        REPORT: 'abs,2.5,0.075'
+        ABSMAX: 'abs,2.5,0.1'
+      P3V3_V:
+        REPORT: 'abs,3.3,0.1'
+        ABSMAX: 'abs,3.3,0.15'
+      P5V_SENSE_I_P1V_V_INCREMENT: '0.2A' #'0.6A'
+      P5V_SENSE_I_P1V8_V_INCREMENT: '0.2A'
+      P5V_SENSE_I_P2V5_V_INCREMENT: '0.1A' #'0.4A'
+      P5V_SENSE_I_P3V3_V_INCREMENT: '0.05A'
+      P5V_SENSE_I_LOAD_TOL: '20%'
+      P5V_SENSE_I_LOAD_WARN: '10%'
+
+  LCL_5VShortResponse:
+    description: 'LCL - 5V Short Response'
+    Enable: True
+    continue_on_fail: True
+    tolerance:
+      I_Peak: '%,1.4,5.0' #2.36A ±5%
+      I_LCL: '%,1.0,5.0'
+      I_Nominal: '%,0.36,5.0'
+      t_r: 'abs,10.0,1.5' #3.8ms ±5%
+      t_latch_off: '%,17.0,10.0' #14.5ms ±10%
+      t_LCL_retry: '%,1.5,10.0' #1.8s ±10%
+      t_LCL_hold: '%,17.0,25.0'
+
+  ControlledPower_OtherPwrRails:
+    description: 'Controlled Power - Voltage check and loading of other power rails'
+    Enable: True
+    continue_on_fail: True
+    riscv_elf_location: "/home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf"
+    tolerance:
+      PS_28V_V_OFF: '0.1V'
+      P15V_V_OFF: '0.1V'
+      ENCODER_PS_5V_V_OFF: '0.1V'
+      PS_28V_I: '10%'
+      P5V_SENSE_I: '10%'
+      PS_28V_I_INCREASED:
+        REPORT: '%,0.715,10.0'
+        ABSMAX: '%,0.715,20.0'
+      PS_28V_V:
+        REPORT: 'abs,28.0,0.5'
+        ABSMAX: 'abs,28.0,1.0'
+      P15V_V:
+        REPORT: 'abs,15.3,0.3' #abs,15.0,0.3
+        ABSMAX: 'abs,15.3,0.5' #abs,15.0,0.5
+
+  ADTelemetries_PCDUVinVoltageRead:
+    description: 'Analog and digital telemetries - PCDU VIN Voltage Reading'
+    Enable: True
+    continue_on_fail: True
+    riscv_elf_location: "/home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf"
+    tolerance:
+      SYS_VBUS_RAW_20V:   'abs,40000,32' # 0x0000BF40 +- 0x20
+      SYS_VBUS_RAW_30V:   'abs,13232,32' # 0x00004D80 +- 0x20
+
+  ADTelemetries_5VCurrentCalib:
+    description: 'Analog and digital telemetries - 5V Current reading and calibration'
+    Enable: True
+    continue_on_fail: True
+    riscv_elf_location: "/home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf"
+    tolerance:
+      SYS_ADC1_TOL: '1%'
+
+  ADTelemetries_5VVoltageCalib:
+    description: 'Analog and digital telemetries - 5V Voltage reading and calibration'
+    Enable: True
+    continue_on_fail: True
+    riscv_elf_location: "/home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf"
+    tolerance:
+      SYS_ADC2_TOL: '1%'
+
+  ADTelemetries_BoardTemp:
+    description: 'Analog and digital telemetries - board temperature'
+    Enable: True
+    continue_on_fail: True
+    riscv_elf_location: "/home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf"
+    tolerance:
+      SYS_ADC3_RAW:       'abs,4294931344,64' # =0xFFFF7390 +- 0x40
+
+  ADTelemetries_PT1000GB:
+    description: 'Analog and digital telemetries - board temperature'
+    Enable: True
+    continue_on_fail: True
+    riscv_elf_location: "/home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf"
+    tolerance:
+      GB_PT1000_falling_thr: 'abs,1404,20'
+      GB_PT1000_rising_thr:  'abs,1328,20'
+
+  ADTelemetries_NTCFW:
+    description: 'Analog and digital telemetries - NTC FW'
+    Enable: True
+    continue_on_fail: True
+    riscv_elf_location: "/home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf"
+    tolerance:
+      FW_NTC_falling_thr: 'abs,836,40'
+      FW_NTC_rising_thr:  'abs,1777,40'
+
+  ADTelemetries_NTCPCDU:
+    description: 'Analog and digital telemetries - NTC PCDU 1 & 2'
+    Enable: True
+    continue_on_fail: True
+    riscv_elf_location: "/home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf"
+    tolerance:
+      PCDU_NTC1_falling_thr:  'abs,569,20'
+      PCDU_NTC1_rising_thr:   'abs,414,20'
+      PCDU_NTC2_falling_thr:  'abs,569,20'
+      PCDU_NTC2_rising_thr:   'abs,414,20'
+
+  MotorDriving_GBADCCalib:
+    description: 'Motor Driving Circuitry - GB ADC Calibration'
+    Enable: True
+    continue_on_fail: True
+    riscv_elf_location: "/home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf"
+    tolerance:
+      GB_IA_SCALING_FACTOR: 'abs,-11.5,0.5'
+      GB_IB_SCALING_FACTOR: 'abs,-11.5,0.5'
+      GB_IC_SCALING_FACTOR: 'abs,-11.5,0.5'
+      GB_IA_ADC_OFFSET: 'abs,0,0.01'
+      GB_IB_ADC_OFFSET: 'abs,0,0.01'
+      GB_IC_ADC_OFFSET: 'abs,0,0.01'
+      GB_IA_ADC_TOL: '10%'
+      GB_IB_ADC_TOL: '10%'
+      GB_IC_ADC_TOL: '10%'
+      GB_IA_ADC_WARN: '1%'
+      GB_IB_ADC_WARN: '1%'
+      GB_IC_ADC_WARN: '1%'
+
+  MotorDriving_FWADCCalib:
+    description: 'Motor Driving Circuitry - FW ADC Calibration'
+    Enable: True
+    continue_on_fail: True
+    riscv_elf_location: "/home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf"
+    tolerance:
+      FW_IA_SCALING_FACTOR: 'abs,-5.5,0.5'
+      FW_IB_SCALING_FACTOR: 'abs,-5.5,0.5'
+      FW_IC_SCALING_FACTOR: 'abs,-5.5,0.5'
+      FW_IA_ADC_OFFSET: 'abs,0,0.01'
+      FW_IB_ADC_OFFSET: 'abs,0,0.01'
+      FW_IC_ADC_OFFSET: 'abs,0,0.01'
+      FW_IA_ADC_TOL: '5%'
+      FW_IB_ADC_TOL: '5%'
+      FW_IC_ADC_TOL: '5%'
+      FW_IA_ADC_WARN: '1%'
+      FW_IB_ADC_WARN: '1%'
+      FW_IC_ADC_WARN: '1%'

@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Tests from YAML</title>
+    <link rel="stylesheet" href="{% static 'TestYMLScripts/tests.css' %}">
+    <script>
+        // Function to dynamically add new fields
+        function addField(parentId, keyName) {
+            const parent = document.getElementById(parentId);
+            const newField = document.createElement("div");
+            newField.classList.add("input-group");
+            newField.innerHTML = `
+                <label>
+                    <input type="text" name="${keyName}" placeholder="Enter key">
+                    <input type="text" name="${keyName}_value" placeholder="Enter value">
+                </label>
+            `;
+            parent.appendChild(newField);
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Editable Tests from YAML</h1>
+        <form method="POST" action="{% url 'TestYMLScripts:save_tests' %}">
+            {% csrf_token %}
+        
+        
+          
+            {% for key, value in tests.items %}
+                {% include 'TestYMLScripts/nested_field.html' with key=key value=value parent_key='' %}
+            {% endfor %}
+            <div class="form-group">
+                <button type="button" onclick="addField('dynamic-fields', 'new_field')">Add Field</button>
+            </div>
+
+            <div id="dynamic-fields"></div>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

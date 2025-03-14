@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d7e27dac-a15c-4861-8879-02d7dbe62c39" name="Changes" comment="Initial Commit: &#10;1. Reads yml file from local storage &#10;2. Displays it in a web interface, &#10;3. Allows user to edit data in tests&#10;4. Saves updated tests in a separate yml" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/yml-editor-web-interface" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;sidra.bilal&quot;,
+      &quot;fullname&quot;: &quot;sidra bilal&quot;
+    }
+  }
+}</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;https://gitlab.com/veoware/tools/omnitest-group/omni_webrunner_poc.git&quot;,
+    &quot;second&quot;: &quot;edb6cf44-db56-4157-8d0a-d2512b55dd21&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2tD5eTGZOkOpSozP13zEBhinEZt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Django Server.veoware.executor": "Run",
+    "JavaScript Debug.nested_field.html.executor": "Run",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "django.template.preview.state": "SHOW_EDITOR",
+    "last_opened_file_path": "/Users/Sidra/PycharmProjects/veoware",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.intellij.python.django.customization.DjangoModulesConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/static/TestYMLScripts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/TestYMLScripts" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/veoware" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Django Server.veoware">
+    <configuration name="nested_field.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/veoware/templates/TestYMLScripts/nested_field.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="veoware" type="Python.DjangoServer" factoryName="Django server">
+      <module name="veoware" />
+      <option name="ENV_FILES" value="Settings | Languages &amp; Frameworks | Django" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (veoware)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="localhost" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Django Server.veoware" />
+      <item itemvalue="JavaScript Debug.nested_field.html" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.nested_field.html" />
+        <item itemvalue="JavaScript Debug.nested_field.html" />
+        <item itemvalue="JavaScript Debug.nested_field.html" />
+        <item itemvalue="JavaScript Debug.nested_field.html" />
+        <item itemvalue="JavaScript Debug.nested_field.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23339.19" />
+        <option value="bundled-python-sdk-0029f7779945-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23339.19" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d7e27dac-a15c-4861-8879-02d7dbe62c39" name="Changes" comment="" />
+      <created>1739873900125</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739873900125</updated>
+      <workItem from="1739873904466" duration="906000" />
+      <workItem from="1739875075769" duration="1769000" />
+      <workItem from="1739878691643" duration="13760000" />
+      <workItem from="1740385621685" duration="15265000" />
+      <workItem from="1740998147459" duration="3606000" />
+      <workItem from="1741017979753" duration="1376000" />
+      <workItem from="1741946081453" duration="4787000" />
+      <workItem from="1741952882677" duration="525000" />
+      <workItem from="1741953515909" duration="910000" />
+      <workItem from="1741954469091" duration="213000" />
+      <workItem from="1741954763492" duration="583000" />
+      <workItem from="1741955420114" duration="193000" />
+      <workItem from="1741955687340" duration="836000" />
+      <workItem from="1741956836535" duration="259000" />
+      <workItem from="1741957123590" duration="124000" />
+      <workItem from="1741957257658" duration="812000" />
+      <workItem from="1741958336860" duration="48000" />
+      <workItem from="1741958393394" duration="247000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial Commit: Webrunner reads yml file from local storage displays it in a web interface, allows user to manipulate data and saves updated tests in a separate yml after manipulation">
+      <option name="closed" value="true" />
+      <created>1741947236825</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741947236827</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Initial Commit: &#10;1. Reads yml file from local storage &#10;2. Displays it in a web interface, &#10;3. Allows user to edit data in tests&#10;4. Saves updated tests in a separate yml">
+      <option name="closed" value="true" />
+      <created>1741954157533</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741954157533</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="feature/yml-editor-web-interface" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit: Webrunner reads yml file from local storage displays it in a web interface, allows user to manipulate data and saves updated tests in a separate yml after manipulation" />
+    <MESSAGE value="Initial Commit: &#10;1. Reads yml file from local storage &#10;2. Displays it in a web interface, &#10;3. Allows user to edit data in tests&#10;4. Saves updated tests in a separate yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit: &#10;1. Reads yml file from local storage &#10;2. Displays it in a web interface, &#10;3. Allows user to edit data in tests&#10;4. Saves updated tests in a separate yml" />
+  </component>
+</project>
