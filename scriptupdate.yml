@@ -91,23 +91,7 @@ Tests:
     continue_on_fail: 'False'
     sig_ampl: '5'
     max_speed: '90'
-    sig_freq: '0.5'
-    freq_sampl: '100'
-    iq_fact: '100'
-    debug: 'False'
-  GB_PlResponse:
-    enable: 'False'
-    description: Save data on gimbal position-loop performance
-    continue_on_fail: 'False'
-    iq_fact: '100'
-    time_response:
-      sig_freq: '0.5'
-      freq_sampl: '100'
-      rep_fact: '2'
-      max_speed: '90'
-      sig_ampl:
-        '0': '1'
-        '1': '2'
+    sig_freq: '0.5'git
         '2': '5'
         '3': '10'
   CA_ReportGenerator:
