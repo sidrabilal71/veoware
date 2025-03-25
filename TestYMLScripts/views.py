@@ -13,13 +13,12 @@ from django.shortcuts import render
 # Create your views here.
 def update_tests(request):
     # Load the data from the config.yml file
-    data = load_yaml('config.yml')
+    data = load_yaml('/home/veo/PycharmProjects/arduinoled/example/example-config.yml')
     # Extract only the 'Tests' section
-    tests = data.get('Tests', {})
-
+    tests = data.get('tests', {}) #todo: make sure the case for "tests" in yml file a it will not read otherwise
     testsflatten=get_dict_from_YML(tests)
     print(testsflatten)
-    tests = data.get('Tests', {})
+    tests = data.get('tests', {})
 
     return render(request, 'TestYMLScripts/update_tests.html', {'tests': tests})
 
@@ -62,6 +61,8 @@ def get_dict_from_YML(data):
 def save_tests(request):
 
 
+
+
     # if request.method == 'POST':
     #     updated_tests = {}
     #     for key, value in request.POST.items():
@@ -72,6 +73,9 @@ def save_tests(request):
     if request.method == 'POST':
         updated_tests = {}
         tests=(request.POST.dict())
+
+
+        original_structure=tests.pop('csrfmiddlewaretoken')
         # Convert list structure back
         if isinstance(tests, list):
             original_structure = unflatten_list(tests)
@@ -81,11 +85,14 @@ def save_tests(request):
 
         print(tests)
         print(original_structure)
-
-        save_yaml({'Tests': original_structure}, 'scriptupdate.yml')
+        data = load_yaml('/home/veo/PycharmProjects/arduinoled/example/example-config.yml') #todo replace with env variable
+        data.pop('tests', None)
+        data['tests']=original_structure
+        save_yaml(data, '/home/veo/PycharmProjects/arduinoled/example/example-config.yml')
+        # save_yaml({'tests': original_structure}, 'example-config.yml')
  # Redirect to a success page or the same page
 
-        return render(request, 'TestYMLScripts/update_tests.html', {'tests': load_yaml('config1.yml')})
+        return render(request, 'TestYMLScripts/update_tests.html', {'tests': load_yaml('/home/veo/PycharmProjects/arduinoled/example/example-config.yml')})
 
 
 def save_yaml(data, file_path):
@@ -111,21 +118,22 @@ def unflatten_dict(flat_dict, separator='.'):
 def unflatten_list(flat_list, separator='.'):
     unflattened_dict = {}
     for key, value in flat_list:
-        keys = key.split(separator)
-        d = unflattened_dict
-        for k in keys[:-1]:
-            if k.isdigit():
-                k = int(k)
-                while len(d) <= k:
-                    d.append({})
-                d = d[k]
+        if key != 'csrfmiddlewaretoken':
+            keys = key.split(separator)
+            d = unflattened_dict
+            for k in keys[:-1]:
+                if k.isdigit():
+                    k = int(k)
+                    while len(d) <= k:
+                        d.append({})
+                    d = d[k]
+                else:
+                    d = d.setdefault(k, {})
+            if keys[-1].isdigit():
+                key_index = int(keys[-1])
+                while len(d) <= key_index:
+                    d.append(None)
+                d[key_index] = value
             else:
-                d = d.setdefault(k, {})
-        if keys[-1].isdigit():
-            key_index = int(keys[-1])
-            while len(d) <= key_index:
-                d.append(None)
-            d[key_index] = value
-        else:
-            d[keys[-1]] = value
+                d[keys[-1]] = value
     return unflattened_dict

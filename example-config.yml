@@ -1,0 +1,11 @@
+modules:
+  ArduinoLed:
+    interface: serial
+    device: /dev/ttyACM0
+tests:
+  ExampleTest:
+    class: ArduinoConfigExample
+    description: Example Arduino Led Test
+    enable: 'True'
+    continue_on_fail: 'False'
+    arduinoledstate: FF

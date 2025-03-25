@@ -1,100 +1,201 @@
 Tests:
-  csrfmiddlewaretoken: XkqA4cuYB9pWHvuVmsLRp50yMKQQ2phTudPjq7Nbe8ow5Z8JubrVISsk1PLW14oq
-  GB_MechOffsetCalib:
-    enable: 'False'
-    description: Find the mechanical angle offset for the gimbal.
+  csrfmiddlewaretoken: xaoljnvTt5pEpI2xUjbIeqdj6dw0NDYFbVFn7x17b31oBDCV7SocqsczL34XUx2m
+  FPGAPowerChain_GeneralVoltageTest:
+    description: General voltage check of FPGA power chain
+    Enable: 'True'
     continue_on_fail: 'False'
-  GB_ElecOffsetCalib:
-    enable: 'False'
-    description: Find the electrical angle offset for the gimbal.
+    tolerance:
+      SUPPLY_I:
+        REPORT: abs,0.36,0.05
+        ABSMAX: abs,0.36,0.08
+      P5V_SENSE_I: 10%
+      P5V_SENSE_V:
+        REPORT: abs,5,0.1
+        ABSMAX: abs,5,0.15
+      P1V_V:
+        REPORT: abs,1,0.03
+        ABSMAX: abs,1,0.2
+      P1V8_V:
+        REPORT: abs,1.8,0.09
+        ABSMAX: abs,1.8,0.12
+      P2V5_V:
+        REPORT: abs,2.5,0.075
+        ABSMAX: abs,2.5,0.1
+      P3V3_V:
+        REPORT: abs,3.3,0.1
+        ABSMAX: abs,3.3,0.15
+  FPGABitstreamFlashTest:
+    description: FPGA Bitstream Flash
+    Enable: 'True'
     continue_on_fail: 'False'
-  GB_ClTuning:
-    enable: 'False'
-    description: Tune the gimbal current-loop parameters
-    continue_on_fail: 'False'
-    sig_ampl: '2'
-    sig_freq: '10'
-    freq_sampl: '20000'
-    debug: 'False'
-  GB_ClResponse:
-    enable: 'False'
-    description: Save data on gimbal current-loop performance
-    continue_on_fail: 'False'
-    freq_response:
-      enable: 'False'
-      sig_ampl: '1.5'
-      freq_sampl: '20000'
-      rep_fact: '3'
-      f_min: '10'
-      f_max: '1000'
-    time_response:
-      enable: 'True'
-      sig_freq: '10'
-      freq_sampl: '20000'
-      rep_fact: '3'
-      sig_ampl:
-        '0': '1'
-        '1': '2'
-        '2': '3'
-        '3': '4'
-  GB_IqCharacterization:
-    enable: 'False'
-    description: Find the Iq required to win the gimbal friction
-    continue_on_fail: 'False'
-  GB_SlTuning:
-    enable: 'False'
-    description: Tune the gimbal speed-loop parameters
-    continue_on_fail: 'False'
-    freq_sampl: '1000'
-    iq_fact: '100'
-    n_range: '2'
-    tag:
-      '0': L
-      '1': H
-    sig_ampl:
-      '0': '3'
-      '1': '45'
-    sig_freq:
-      '0': '0.25'
-      '1': '1'
-    debug: 'False'
-  GB_SlResponse:
-    enable: 'False'
-    description: Save data on gimbal speed-loop performance
-    continue_on_fail: 'False'
-    freq_sampl: '1000'
-    iq_fact: '100'
-    tag:
-      '0': L
-      '1': H
-    freq_response:
-      enable: 'True'
-      rep_fact: '2'
-      f_min: '0.1'
-      f_max: '100'
-      sig_ampl:
-        '0': '5'
-        '1': '45'
-    time_response:
-      enable: 'True'
-      sig_freq: '0.05'
-      rep_fact: '1'
-  ? ''
-  : '0': '10'
-    '1': '30'
-    '2': '60'
-    '3': '90'
-    '4': '10'
-  GB_PlTuning:
-    enable: 'False'
-    description: Tune the gimbal position-loop parameters
-    continue_on_fail: 'False'
-    sig_ampl: '5'
-    max_speed: '90'
-    sig_freq: '0.5'git
-        '2': '5'
-        '3': '10'
-  CA_ReportGenerator:
-    enable: 'True'
-    description: Generate the report fot the module
-    continue_on_fail: False
+    fpexpress_param:
+      jobfile_location: /home/dev/Git/ICC-169-v1_91_CONF2.job
+      Checksum: A99A
+      Program: 'True'
+      Verify: 'True'
+    tolerance:
+      SUPPLY_I:
+        REPORT: abs,0.36,0.05
+        ABSMAX: abs,0.36,0.08
+  FPGAPowerChain_PowerUpSeqTest:
+    description: Power-up sequence of FPGA power chain
+    Enable: 'True'
+    continue_on_fail: 'True'
+    tolerance:
+      P1V_V_DLY_MS: minmax,5.5,6.5
+      P1V_V_to_P2V5_V_DLY_MS: minmax,6.5,7.5
+      P2V5_V_to_P1V8_V_DLY_MS: minmax,1.5,2.5
+      P2V5_V_to_P3V3_V_DLY_MS: minmax,1.5,2.5
+  FPGAPowerChain_LoadingTest:
+    description: Loading of FPGA Power Chain
+    Enable: 'True'
+    continue_on_fail: 'True'
+    tolerance:
+      SUPPLY_I:
+        REPORT: abs,0.36,0.05
+        ABSMAX: abs,0.36,0.08
+      P5V_SENSE_I: 10%
+      P5V_SENSE_V:
+        REPORT: abs,5,0.1
+        ABSMAX: abs,5,0.15
+      P1V_V:
+        REPORT: abs,1,0.03
+        ABSMAX: abs,1,0.2
+      P1V8_V:
+        REPORT: abs,1.8,0.09
+        ABSMAX: abs,1.8,0.12
+      P2V5_V:
+        REPORT: abs,2.5,0.075
+        ABSMAX: abs,2.5,0.1
+      P3V3_V:
+        REPORT: abs,3.3,0.1
+        ABSMAX: abs,3.3,0.15
+      P5V_SENSE_I_P1V_V_INCREMENT: 0.2A
+      P5V_SENSE_I_P1V8_V_INCREMENT: 0.2A
+      P5V_SENSE_I_P2V5_V_INCREMENT: 0.1A
+      P5V_SENSE_I_P3V3_V_INCREMENT: 0.05A
+      P5V_SENSE_I_LOAD_TOL: 20%
+      P5V_SENSE_I_LOAD_WARN: 10%
+  LCL_5VShortResponse:
+    description: LCL - 5V Short Response
+    Enable: 'True'
+    continue_on_fail: 'True'
+    tolerance:
+      I_Peak: '%,1.4,5.0'
+      I_LCL: '%,1.0,5.0'
+      I_Nominal: '%,0.36,5.0'
+      t_r: abs,10.0,1.5
+      t_latch_off: '%,17.0,10.0'
+      t_LCL_retry: '%,1.5,10.0'
+      t_LCL_hold: '%,17.0,25.0'
+  ControlledPower_OtherPwrRails:
+    description: Controlled Power - Voltage check and loading of other power rails
+    Enable: 'True'
+    continue_on_fail: 'True'
+    riscv_elf_location: /home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf
+    tolerance:
+      PS_28V_V_OFF: 0.1V
+      P15V_V_OFF: 0.1V
+      ENCODER_PS_5V_V_OFF: 0.1V
+      PS_28V_I: 10%
+      P5V_SENSE_I: 10%
+      PS_28V_I_INCREASED:
+        REPORT: '%,0.715,10.0'
+        ABSMAX: '%,0.715,20.0'
+      PS_28V_V:
+        REPORT: abs,28.0,0.5
+        ABSMAX: abs,28.0,1.0
+      P15V_V:
+        REPORT: abs,15.3,0.3
+        ABSMAX: abs,15.3,0.5
+  ADTelemetries_PCDUVinVoltageRead:
+    description: Analog and digital telemetries - PCDU VIN Voltage Reading
+    Enable: 'True'
+    continue_on_fail: 'True'
+    riscv_elf_location: /home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf
+    tolerance:
+      SYS_VBUS_RAW_20V: abs,40000,32
+      SYS_VBUS_RAW_30V: abs,13232,32
+  ADTelemetries_5VCurrentCalib:
+    description: Analog and digital telemetries - 5V Current reading and calibration
+    Enable: 'True'
+    continue_on_fail: 'True'
+    riscv_elf_location: /home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf
+    tolerance:
+      SYS_ADC1_TOL: 1%
+  ADTelemetries_5VVoltageCalib:
+    description: Analog and digital telemetries - 5V Voltage reading and calibration
+    Enable: 'True'
+    continue_on_fail: 'True'
+    riscv_elf_location: /home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf
+    tolerance:
+      SYS_ADC2_TOL: 1%
+  ADTelemetries_BoardTemp:
+    description: Analog and digital telemetries - board temperature
+    Enable: 'True'
+    continue_on_fail: 'True'
+    riscv_elf_location: /home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf
+    tolerance:
+      SYS_ADC3_RAW: abs,4294931344,64
+  ADTelemetries_PT1000GB:
+    description: Analog and digital telemetries - board temperature
+    Enable: 'True'
+    continue_on_fail: 'True'
+    riscv_elf_location: /home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf
+    tolerance:
+      GB_PT1000_falling_thr: abs,1404,20
+      GB_PT1000_rising_thr: abs,1328,20
+  ADTelemetries_NTCFW:
+    description: Analog and digital telemetries - NTC FW
+    Enable: 'True'
+    continue_on_fail: 'True'
+    riscv_elf_location: /home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf
+    tolerance:
+      FW_NTC_falling_thr: abs,836,40
+      FW_NTC_rising_thr: abs,1777,40
+  ADTelemetries_NTCPCDU:
+    description: Analog and digital telemetries - NTC PCDU 1 & 2
+    Enable: 'True'
+    continue_on_fail: 'True'
+    riscv_elf_location: /home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf
+    tolerance:
+      PCDU_NTC1_falling_thr: abs,569,20
+      PCDU_NTC1_rising_thr: abs,414,20
+      PCDU_NTC2_falling_thr: abs,569,20
+      PCDU_NTC2_rising_thr: abs,414,20
+  MotorDriving_GBADCCalib:
+    description: Motor Driving Circuitry - GB ADC Calibration
+    Enable: 'True'
+    continue_on_fail: 'True'
+    riscv_elf_location: /home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf
+    tolerance:
+      GB_IA_SCALING_FACTOR: abs,-11.5,0.5
+      GB_IB_SCALING_FACTOR: abs,-11.5,0.5
+      GB_IC_SCALING_FACTOR: abs,-11.5,0.5
+      GB_IA_ADC_OFFSET: abs,0,0.01
+      GB_IB_ADC_OFFSET: abs,0,0.01
+      GB_IC_ADC_OFFSET: abs,0,0.01
+      GB_IA_ADC_TOL: 10%
+      GB_IB_ADC_TOL: 10%
+      GB_IC_ADC_TOL: 10%
+      GB_IA_ADC_WARN: 1%
+      GB_IB_ADC_WARN: 1%
+      GB_IC_ADC_WARN: 1%
+  MotorDriving_FWADCCalib:
+    description: Motor Driving Circuitry - FW ADC Calibration
+    Enable: 'True'
+    continue_on_fail: 'True'
+    riscv_elf_location: /home/dev/Git/production-icc/lib/cmg_firmware_production/build/CMG_production_firmware_csp_build/CMG_production_firmware_csp.elf
+    tolerance:
+      FW_IA_SCALING_FACTOR: abs,-5.5,0.5
+      FW_IB_SCALING_FACTOR: abs,-5.5,0.5
+      FW_IC_SCALING_FACTOR: abs,-5.5,0.5
+      FW_IA_ADC_OFFSET: abs,0,0.01
+      FW_IB_ADC_OFFSET: abs,0,0.01
+      FW_IC_ADC_OFFSET: abs,0,0.01
+      FW_IA_ADC_TOL: 5%
+      FW_IB_ADC_TOL: 5%
+      FW_IC_ADC_TOL: 5%
+      FW_IA_ADC_WARN: 1%
+      FW_IB_ADC_WARN: 1%
+      FW_IC_ADC_WARN: nuc run tess
