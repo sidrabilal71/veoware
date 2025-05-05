@@ -8,10 +8,18 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
+import tkinter
+
+from tkinter import filedialog
 
 
 # Create your views here.
 def update_tests(request):
+
+    root = tkinter.Tk()
+    root.withdraw()
+
+    file_path = filedialog.askopenfilename()
     # Load the data from the config.yml file
     data = load_yaml('/home/veo/PycharmProjects/arduinoled/example/example-config.yml')
     # Extract only the 'Tests' section
